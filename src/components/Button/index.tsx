@@ -6,8 +6,8 @@ type ButtonLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   children?: string;
 };
 
-const Button: React.FC<ButtonLinkProps> = ({ children, href }) => {
-  return <ButtonLink href={href}>{children}</ButtonLink>;
+const Button: React.FC<ButtonLinkProps> = ({ children, ...rest }) => {
+  return <ButtonLink {...rest}>{children}</ButtonLink>;
 };
 
 export default Button;

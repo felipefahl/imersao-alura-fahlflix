@@ -9,7 +9,9 @@ const Menu: React.FC = () => {
       <a href="/">
         <img className="Logo" src={logo} alt="FahlFlix" />
       </a>
-      <Button href="/">Novo vídeo</Button>
+      <Button className="ButtonLink" href="/">
+        Novo vídeo
+      </Button>
     </nav>
   );
 };
