@@ -17,6 +17,12 @@ export default createGlobalStyle`
   --backEnd: #00C86F;
 }
 
+#root{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 html,
 body {
   margin: 0;
