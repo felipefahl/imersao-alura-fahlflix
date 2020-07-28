@@ -1,15 +1,13 @@
 import React from 'react';
-import Menu from './components/Menu';
-import Carousel from './components/Carousel';
-import BannerMain from './components/BannerMain';
-import dadosIniciais from './data/dados_iniciais.json';
-import { Category } from './components/Carousel/index';
+import Carousel from '../../components/Carousel';
+import BannerMain from '../../components/BannerMain';
+import dadosIniciais from '../../data/dados_iniciais.json';
+import { Category } from '../../components/Carousel/index';
+import PageDefault from '../../components/PageDefault';
 
-const App: React.FC = () => {
+const Home: React.FC = () => {
   return (
-    <div style={{ background: '#141414' }}>
-      <Menu />
-
+    <PageDefault>
       <BannerMain
         videoTitle={dadosIniciais.categorias[0].videos[0].titulo}
         videoDescription="O que é frontend?"
@@ -30,8 +28,8 @@ const App: React.FC = () => {
       <Carousel category={dadosIniciais.categorias[4] as Category} />
 
       <Carousel category={dadosIniciais.categorias[5] as Category} />
-    </div>
+    </PageDefault>
   );
 };
 
-export default App;
+export default Home;

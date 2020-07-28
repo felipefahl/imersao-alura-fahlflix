@@ -1,3 +1,7 @@
+import { createGlobalStyle } from 'styled-components';
+
+export default createGlobalStyle`
+
 .Logo {
   max-width: 168px;
 }
@@ -52,4 +56,4 @@ body {
     border: 0;
     text-align: center;
   }
-}
+}`;
