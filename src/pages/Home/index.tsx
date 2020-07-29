@@ -19,15 +19,9 @@ const Home: React.FC = () => {
         category={dadosIniciais.categorias[0] as Category}
       />
 
-      <Carousel category={dadosIniciais.categorias[1] as Category} />
-
-      <Carousel category={dadosIniciais.categorias[2] as Category} />
-
-      <Carousel category={dadosIniciais.categorias[3] as Category} />
-
-      <Carousel category={dadosIniciais.categorias[4] as Category} />
-
-      <Carousel category={dadosIniciais.categorias[5] as Category} />
+      {dadosIniciais.categorias.map(categoria => (
+        <Carousel key={categoria.cor} category={categoria as Category} />
+      ))}
     </PageDefault>
   );
 };
