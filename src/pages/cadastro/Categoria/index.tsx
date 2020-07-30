@@ -12,12 +12,12 @@ import Button from '../../../components/Button';
 import api from '../../../services/api';
 
 interface Categoria {
-  nome: string;
+  titulo: string;
   descricao: string;
   cor: string;
 }
 
-const initialValue = { nome: '', descricao: '', cor: '' } as Categoria;
+const initialValue = { titulo: '', descricao: '', cor: '' } as Categoria;
 
 const CadastroCategoria: React.FC = () => {
   const [valores, setValores] = useState<Categoria>(initialValue);
@@ -57,8 +57,8 @@ const CadastroCategoria: React.FC = () => {
         <FormField
           type="text"
           text="Nome da Categoria"
-          value={valores.nome}
-          name="nome"
+          value={valores.titulo}
+          name="titulo"
           onChange={handleCategoryChange}
         />
 
@@ -82,7 +82,7 @@ const CadastroCategoria: React.FC = () => {
       </form>
       <ul>
         {categorias.map(categoria => {
-          return <li key={categoria.nome}>{categoria.nome}</li>;
+          return <li key={categoria.titulo}>{categoria.titulo}</li>;
         })}
       </ul>
       <Link to="/">Ir para home</Link>
