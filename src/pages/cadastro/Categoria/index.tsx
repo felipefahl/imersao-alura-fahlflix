@@ -2,6 +2,7 @@ import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
+import Button from '../../../components/Button';
 
 interface Categoria {
   nome: string;
@@ -16,9 +17,7 @@ const CadastroCategoria: React.FC = () => {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
   const handleCategoryChange = useCallback(
-    (
-      event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-    ) => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
       const key = event.target.getAttribute('name') || '';
       setValores(state => ({ ...state, [key]: value }));
@@ -63,7 +62,7 @@ const CadastroCategoria: React.FC = () => {
           onChange={handleCategoryChange}
         />
 
-        <button type="submit">Cadastrar</button>
+        <Button type="submit">Cadastrar</Button>
       </form>
       <ul>
         {categorias.map((categoria, indice) => {
