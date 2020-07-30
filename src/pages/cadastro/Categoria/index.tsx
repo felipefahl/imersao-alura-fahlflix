@@ -1,8 +1,15 @@
-import React, { useState, useCallback, ChangeEvent, FormEvent } from 'react';
+import React, {
+  useState,
+  useCallback,
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+} from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
+import api from '../../../services/api';
 
 interface Categoria {
   nome: string;
@@ -26,13 +33,22 @@ const CadastroCategoria: React.FC = () => {
   );
 
   const handleSubmit = useCallback(
-    (event: FormEvent) => {
+    async (event: FormEvent) => {
       event.preventDefault();
+
+      await api.post('categorias', valores);
+
       setCategorias(state => [...state, valores]);
       setValores(initialValue);
     },
     [valores],
   );
+
+  useEffect(() => {
+    api
+      .get<Categoria[]>('categorias')
+      .then(response => setCategorias(response.data));
+  }, []);
 
   return (
     <PageDefault>
@@ -65,8 +81,8 @@ const CadastroCategoria: React.FC = () => {
         <Button type="submit">Cadastrar</Button>
       </form>
       <ul>
-        {categorias.map((categoria, indice) => {
-          return <li key={indice}>{categoria.nome}</li>;
+        {categorias.map(categoria => {
+          return <li key={categoria.nome}>{categoria.nome}</li>;
         })}
       </ul>
       <Link to="/">Ir para home</Link>

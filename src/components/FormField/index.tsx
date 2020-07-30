@@ -49,9 +49,6 @@ const FormField: React.FC<FormFieldProps> = ({
   return (
     <FormFieldWrapper>
       <Label htmlFor={fieldId}>
-        <LabelText isFocused={isFocused} hasValue={hasValue}>
-          {text}:
-        </LabelText>
         <Input
           as={tag}
           id={fieldId}
@@ -59,6 +56,9 @@ const FormField: React.FC<FormFieldProps> = ({
           onBlur={handleInputOnBlur}
           {...fieldAtributes}
         />
+        <LabelText isFocused={isFocused} hasValue={hasValue}>
+          {text}:
+        </LabelText>
       </Label>
     </FormFieldWrapper>
   );
