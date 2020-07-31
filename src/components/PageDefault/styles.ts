@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Main = styled.main`
+export interface MainProps {
+  paddingAll?: boolean;
+}
+
+export const Main = styled.main<MainProps>`
   flex: 1;
   background-color: var(--black);
   color: var(--white);
@@ -10,4 +14,9 @@ export const Main = styled.main`
   @media (max-width: 800px) {
     margin-top: 40px;
   }
+  ${props =>
+    props.paddingAll &&
+    css`
+      padding: 0;
+    `}
 `;

@@ -1,27 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Carousel from '../../components/Carousel';
 import BannerMain from '../../components/BannerMain';
-import dadosIniciais from '../../data/dados_iniciais.json';
-import { Category } from '../../components/Carousel/index';
 import PageDefault from '../../components/PageDefault';
+import categoriasRepository, { Category } from '../../repositories/categorias';
 
 const Home: React.FC = () => {
+  const [categorias, setCategorias] = useState<Category[]>([]);
+
+  useEffect(() => {
+    categoriasRepository
+      .getAllWithVideos()
+      .then(response => setCategorias(response));
+  }, []);
+
   return (
-    <PageDefault>
-      <BannerMain
-        videoTitle={dadosIniciais.categorias[0].videos[0].titulo}
-        videoDescription="O que é frontend?"
-        url={dadosIniciais.categorias[0].videos[0].url}
-      />
+    <PageDefault paddingAll>
+      {categorias.length === 0 && <div>Loading...</div>}
 
-      <Carousel
-        ignoreFirstVideo
-        category={dadosIniciais.categorias[0] as Category}
-      />
+      {categorias.map((categoria, indice) => {
+        if (indice === 0) {
+          return (
+            <div key={categoria.id}>
+              <BannerMain
+                videoTitle={categorias[0].videos[0].titulo}
+                url={categorias[0].videos[0].url}
+                videoDescription={categorias[0].videos[0].descricao}
+              />
+              <Carousel ignoreFirstVideo category={categorias[0]} />
+            </div>
+          );
+        }
 
-      {dadosIniciais.categorias.map(categoria => (
-        <Carousel key={categoria.cor} category={categoria as Category} />
-      ))}
+        return <Carousel key={categoria.id} category={categoria} />;
+      })}
     </PageDefault>
   );
 };

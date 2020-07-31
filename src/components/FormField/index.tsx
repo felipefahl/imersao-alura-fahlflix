@@ -7,6 +7,7 @@ interface FormFieldProps {
   value: string;
   name: string;
   type?: 'text' | 'color' | 'textarea';
+  suggestions?: string[];
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -15,6 +16,7 @@ const FormField: React.FC<FormFieldProps> = ({
   onChange,
   type,
   value,
+  suggestions,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -34,8 +36,18 @@ const FormField: React.FC<FormFieldProps> = ({
   }, []);
 
   const hasValue = useMemo(() => {
+    if (!value) {
+      return false;
+    }
     return value.length > 0;
   }, [value]);
+
+  const hasSuggestions = useMemo(() => {
+    if (!suggestions) {
+      return false;
+    }
+    return suggestions.length > 0;
+  }, [suggestions]);
 
   const fieldAtributes = useMemo(() => {
     return {
@@ -43,8 +55,10 @@ const FormField: React.FC<FormFieldProps> = ({
       onChange,
       value,
       type: fieldType,
+      autoComplete: hasSuggestions ? 'off' : 'on',
+      list: hasSuggestions ? `suggestionFor_${fieldId}` : undefined,
     };
-  }, [name, onChange, value, fieldType]);
+  }, [name, onChange, value, fieldType, hasSuggestions, fieldId]);
 
   return (
     <FormFieldWrapper>
@@ -59,6 +73,18 @@ const FormField: React.FC<FormFieldProps> = ({
         <LabelText isFocused={isFocused} hasValue={hasValue}>
           {text}:
         </LabelText>
+        {suggestions && (
+          <datalist id={`suggestionFor_${fieldId}`}>
+            {suggestions.map(suggestion => (
+              <option
+                value={suggestion}
+                key={`suggestionFor_${fieldId}_option${suggestion}`}
+              >
+                {suggestion}
+              </option>
+            ))}
+          </datalist>
+        )}
       </Label>
     </FormFieldWrapper>
   );

@@ -27,6 +27,14 @@ export const Header = styled.nav`
   background: var(--black);
   border-bottom: 2px solid var(--primary);
 
+  span {
+    color: var(--white);
+    font-size: 30px;
+    @media (max-width: 800px) {
+      display: none;
+    }
+  }
+
   @media (max-width: 800px) {
     height: 40px;
     justify-content: center;

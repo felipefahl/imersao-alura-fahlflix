@@ -1,17 +1,15 @@
-import React, {
-  useState,
-  useCallback,
-  ChangeEvent,
-  FormEvent,
-  useEffect,
-} from 'react';
+import React, { useState, useCallback, FormEvent, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FiTrash2 } from 'react-icons/fi';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
-import api from '../../../services/api';
+import useForm from '../../../hooks/form';
+import { Container, List, ListItem, ListItemButton } from './styles';
+import categoriasRepository from '../../../repositories/categorias';
 
 interface Categoria {
+  id: number;
   titulo: string;
   descricao: string;
   cor: string;
@@ -20,34 +18,41 @@ interface Categoria {
 const initialValue = { titulo: '', descricao: '', cor: '' } as Categoria;
 
 const CadastroCategoria: React.FC = () => {
-  const [valores, setValores] = useState<Categoria>(initialValue);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
-
-  const handleCategoryChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const { value } = event.target;
-      const key = event.target.getAttribute('name') || '';
-      setValores(state => ({ ...state, [key]: value }));
-    },
-    [],
-  );
+  const { handleChange, values, clearForm } = useForm<Categoria>(initialValue);
 
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
       event.preventDefault();
 
-      await api.post('categorias', valores);
+      const { titulo, descricao, cor } = values;
+      await categoriasRepository.create({ titulo, descricao, cor });
 
-      setCategorias(state => [...state, valores]);
-      setValores(initialValue);
+      setCategorias(state => [...state, values]);
+      clearForm();
     },
-    [valores],
+    [values, clearForm],
   );
 
+  const handleDeleteCategoria = useCallback(async id => {
+    await categoriasRepository.exclude(id);
+    setCategorias(state => state.filter(cat => cat.id !== id));
+  }, []);
+
   useEffect(() => {
-    api
-      .get<Categoria[]>('categorias')
-      .then(response => setCategorias(response.data));
+    categoriasRepository.getAll().then(response => {
+      const list = response.map(item => {
+        const { id, descricao, titulo, cor } = item;
+        return {
+          id,
+          descricao,
+          titulo,
+          cor,
+        } as Categoria;
+      });
+
+      setCategorias(list);
+    });
   }, []);
 
   return (
@@ -56,36 +61,57 @@ const CadastroCategoria: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <FormField
           type="text"
-          text="Nome da Categoria"
-          value={valores.titulo}
+          text="Título da Categoria"
+          value={values.titulo}
           name="titulo"
-          onChange={handleCategoryChange}
+          onChange={handleChange}
         />
 
         <FormField
           type="textarea"
           text="Descrição"
-          value={valores.descricao}
+          value={values.descricao}
           name="descricao"
-          onChange={handleCategoryChange}
+          onChange={handleChange}
         />
 
         <FormField
           type="color"
           text="Cor"
-          value={valores.cor}
+          value={values.cor}
           name="cor"
-          onChange={handleCategoryChange}
+          onChange={handleChange}
         />
 
-        <Button type="submit">Cadastrar</Button>
+        <Button type="submit">Gravar</Button>
+        <Button as={Link} className="ButtonLink" to="/">
+          Ir para home
+        </Button>
       </form>
-      <ul>
-        {categorias.map(categoria => {
-          return <li key={categoria.titulo}>{categoria.titulo}</li>;
-        })}
-      </ul>
-      <Link to="/">Ir para home</Link>
+      <Container>
+        <h1>Categorias cadastradas</h1>
+
+        <List>
+          {categorias.map(categoria => (
+            <ListItem key={categoria.id} cor={categoria.cor}>
+              <strong>Titulo</strong>
+              <p>{categoria.titulo}</p>
+
+              <strong>Descrição</strong>
+              <p>{categoria.descricao}</p>
+
+              <strong>Cor</strong>
+              <span>{categoria.cor}</span>
+
+              <ListItemButton
+                onClick={() => handleDeleteCategoria(categoria.id)}
+              >
+                <FiTrash2 size={20} color="black" />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Container>
     </PageDefault>
   );
 };

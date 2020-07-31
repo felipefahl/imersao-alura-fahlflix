@@ -3,23 +3,7 @@ import { VideoCardGroupContainer, Title, ExtraLink } from './styles';
 import VideoCard from './components/VideoCard';
 import { SliderItem } from './components/Slider/styles';
 import Slider from './components/Slider';
-
-interface CategoryVideos {
-  url: string;
-  titulo: string;
-}
-
-interface CategoryLinkExtra {
-  url: string;
-  text: string;
-}
-
-export interface Category {
-  titulo: string;
-  cor: string;
-  link_extra: CategoryLinkExtra;
-  videos: CategoryVideos[];
-}
+import { Category } from '../../repositories/categorias';
 
 interface VideoCardGroupProps {
   ignoreFirstVideo?: boolean;

@@ -16,6 +16,11 @@ const Button = styled.button`
   display: inline-block;
   transition: opacity 0.3s;
 
+  & + a,
+  button {
+    margin-left: 10px;
+  }
+
   &:hover,
   &:focus {
     opacity: 0.5;

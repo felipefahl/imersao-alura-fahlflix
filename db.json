@@ -1,21 +1,122 @@
 {
   "categorias": [
     {
-      "id": 1,
-      "titulo": "Front End",
-      "cor": "#6BD1FF",
-      "link_extra": {
-        "text": "Formação de Front End na Alura",
-        "url": "https://www.alura.com.br/cursos-online-front-end"
-      }
+      "titulo": "Alemão",
+      "cor": "#eacb06",
+      "descricao": "Dicas de cursos para aprender a falar alemão",
+      "id": 1
+    },
+    {
+      "titulo": "Espanhol",
+      "cor": "#e4740c",
+      "descricao": "Aprenda espanhhol fácil",
+      "id": 2
     }
-   ],
+  ],
   "videos": [
     {
-      "id": 1,
+      "titulo": "6 DICAS PARA COMEÇAR A APRENDER ALEMÃO - Alemanizando",
+      "descricao": "Começando nossa saga por mais vídeos até o aniversário do canal com um tema queridinho: aprender alemão!",
+      "url": "https://www.youtube.com/watch?v=Sy6rhezzrwc",
+      "categoria": "Alemão",
       "categoriaId": 1,
-      "titulo": "SEO com React",
-      "url": "https://www.youtube.com/watch?v=c8mVlakBESE"
+      "id": 1
+    },
+    {
+      "titulo": "Aula de Alemão #1 | Saudações, Se apresentar | Facil - Explicado por um alemão",
+      "descricao": "Um curso online de alemão",
+      "url": "https://www.youtube.com/watch?v=sX720grcYB4",
+      "categoria": "Alemão",
+      "categoriaId": 1,
+      "id": 2
+    },
+    {
+      "titulo": "Como estudar alemão em casa sozinho l Gabi Ferreira",
+      "descricao": "",
+      "url": "https://www.youtube.com/watch?v=hwZHWmL2qPY",
+      "categoria": "Alemão",
+      "categoriaId": 1,
+      "id": 3
+    },
+    {
+      "titulo": "Curso de Alemão A1 - Aula 1 - Hallo! Mein Name ist...",
+      "descricao": "Hallo! Herzlich willkommen!",
+      "url": "https://www.youtube.com/watch?v=dva8Z3NHWLE",
+      "categoria": "Alemão",
+      "categoriaId": 1,
+      "id": 4
+    },
+    {
+      "titulo": "Alemão Básico - Aula 1",
+      "descricao": "",
+      "url": "https://www.youtube.com/watch?v=R-A1jhCPzqw",
+      "categoria": "Alemão",
+      "categoriaId": 1,
+      "id": 5
+    },
+    {
+      "titulo": "Como estudar alemão sozinho",
+      "descricao": "Neste vídeo você verá algumas orientações sobre como aprender alemão sozinho.\nIniciarei explicando como escolher um livro, como seguir as lições, como resolver a questão de ter enunciados e explicações gramaticais somente em alemão e trarei algumas ideias para treinarem a conversação.",
+      "url": "https://www.youtube.com/watch?v=bGEalpu9QwE",
+      "categoria": "Alemão",
+      "categoriaId": 1,
+      "id": 6
+    },
+    {
+      "titulo": "Cumprimentos em Alemão | Aula #1 | Primeiras Frases em Alemão",
+      "descricao": "",
+      "url": "https://www.youtube.com/watch?v=_rvXvOzRgJA",
+      "categoria": "Alemão",
+      "categoriaId": 1,
+      "id": 7
+    },
+    {
+      "titulo": "APRENDA ESPANHOL EM 1 VÍDEO",
+      "descricao": "",
+      "url": "https://www.youtube.com/watch?v=UUwCa-NDIMA",
+      "categoria": "Espanhol",
+      "categoriaId": 2,
+      "id": 8
+    },
+    {
+      "titulo": "Aprenda Espanhol Dormindo // 130 Frases Essenciais Em Espanhol \\\\ Espanhol / Português",
+      "descricao": "Você quer falar Espanhol bem como falante nativo e melhorar a pronúncia? Aqui estão algumas das frases básicas mais utilizadas no Espanhol. Há 130 neste vídeo. ",
+      "url": "https://www.youtube.com/watch?v=zxqzD1_JB8k",
+      "categoria": "Espanhol",
+      "categoriaId": 2,
+      "id": 9
+    },
+    {
+      "titulo": "Curso de espanhol Lição 1 para iniciantes HD",
+      "descricao": "",
+      "url": "https://www.youtube.com/watch?v=cmMsSX-gUWQ",
+      "categoria": "Espanhol",
+      "categoriaId": 2,
+      "id": 10
+    },
+    {
+      "titulo": "aprenda espanhol enquanto você dorme",
+      "descricao": "Mis aulas de Español",
+      "url": "https://www.youtube.com/watch?v=0VTr3BkNyrs",
+      "categoria": "Espanhol",
+      "categoriaId": 2,
+      "id": 11
+    },
+    {
+      "titulo": "Aprender Espanhol em 5 dias - Conversação para iniciantes",
+      "descricao": "Aprenda Espanhol em 5 dias com nossa lista de 600 expressões e palavras mais comuns. Este é um curso intensivo em Espanhol. Tente memorizar todas as palavras e frases. Isso ajudará você a ter ótimas conversas com nativos.",
+      "url": "https://www.youtube.com/watch?v=c3pE3Vd7OMc",
+      "categoria": "Alemão",
+      "categoriaId": 1,
+      "id": 12
+    },
+    {
+      "titulo": "COMO APRENDER ESPANHOL RÁPIDO | Dicas de Espanhol 🇪🇸",
+      "descricao": "APRENDER ESPANHOL: Dicas de espanhol para aqueles que querem acelerar o aprendizado da língua espanhola.",
+      "url": "https://www.youtube.com/watch?v=KnWC6NcuJ4A",
+      "categoria": "Espanhol",
+      "categoriaId": 2,
+      "id": 13
     }
   ]
 }

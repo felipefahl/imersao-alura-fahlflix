@@ -10,6 +10,7 @@ const Menu: React.FC = () => {
       <Link to="/">
         <img className="Logo" src={logo} alt="FahlFlix" />
       </Link>
+      <span>Sua plataforma para Fahlar várias linguas 🗣</span>
       <Button as={Link} className="ButtonLink" to="/cadastro/video">
         Novo video
       </Button>
