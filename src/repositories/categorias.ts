@@ -24,6 +24,13 @@ export interface Category {
   videos: CategoryVideos[];
 }
 
+interface EditCategory {
+  id: number;
+  titulo: string;
+  descricao: string;
+  cor: string;
+}
+
 interface CreateCategory {
   titulo: string;
   descricao: string;
@@ -53,6 +60,20 @@ const create = async ({
   return response.data;
 };
 
+const update = async ({
+  id,
+  titulo,
+  cor,
+  descricao,
+}: EditCategory): Promise<Category> => {
+  const response = await api.put<Category>(`${URL_CATEGORIES}/${id}`, {
+    titulo,
+    cor,
+    descricao,
+  });
+  return response.data;
+};
+
 const exclude = async (id: number): Promise<void> => {
   await api.delete(`${URL_CATEGORIES}/${id}`);
 };
@@ -61,5 +82,6 @@ export default {
   getAllWithVideos,
   getAll,
   create,
+  update,
   exclude,
 };

@@ -16,8 +16,11 @@ const Button = styled.button`
   display: inline-block;
   transition: opacity 0.3s;
 
-  & + a,
-  button {
+  & + button {
+    margin-left: 10px;
+  }
+
+  & + a {
     margin-left: 10px;
   }
 

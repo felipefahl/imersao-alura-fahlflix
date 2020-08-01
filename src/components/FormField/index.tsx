@@ -10,16 +10,11 @@ interface FormFieldProps {
   suggestions?: string[];
 }
 
-const FormField: React.FC<FormFieldProps> = ({
-  text,
-  name,
-  onChange,
-  type,
-  value,
-  suggestions,
-}) => {
+const FormField: React.ForwardRefRenderFunction<
+  HTMLInputElement,
+  FormFieldProps
+> = ({ text, name, onChange, type, value, suggestions }, ref) => {
   const [isFocused, setIsFocused] = useState(false);
-
   const fieldId = `id_${name}`;
   const isTextArea = type === 'textarea';
   const tag = isTextArea ? 'textarea' : 'input';
@@ -68,6 +63,7 @@ const FormField: React.FC<FormFieldProps> = ({
           id={fieldId}
           onFocus={handleInputFocus}
           onBlur={handleInputOnBlur}
+          ref={ref}
           {...fieldAtributes}
         />
         <LabelText isFocused={isFocused} hasValue={hasValue}>
@@ -90,4 +86,4 @@ const FormField: React.FC<FormFieldProps> = ({
   );
 };
 
-export default FormField;
+export default React.forwardRef(FormField);

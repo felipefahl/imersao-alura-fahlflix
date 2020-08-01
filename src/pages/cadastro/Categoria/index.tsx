@@ -1,43 +1,90 @@
-import React, { useState, useCallback, FormEvent, useEffect } from 'react';
+import React, {
+  useState,
+  useCallback,
+  FormEvent,
+  useEffect,
+  useRef,
+} from 'react';
 import { Link } from 'react-router-dom';
-import { FiTrash2 } from 'react-icons/fi';
+import { FiTrash2, FiEdit2 } from 'react-icons/fi';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 import useForm from '../../../hooks/form';
-import { Container, List, ListItem, ListItemButton } from './styles';
+import {
+  MessageContainer,
+  Container,
+  List,
+  ListItem,
+  ListItemButtonContainer,
+  ListItemButton,
+} from './styles';
 import categoriasRepository from '../../../repositories/categorias';
 
 interface Categoria {
-  id: number;
+  id?: number;
   titulo: string;
   descricao: string;
   cor: string;
 }
 
-const initialValue = { titulo: '', descricao: '', cor: '' } as Categoria;
+const initialValue = { titulo: '', descricao: '', cor: '#ffffff' } as Categoria;
 
 const CadastroCategoria: React.FC = () => {
+  const inputTitleRef = useRef<HTMLInputElement>(null);
+  const [isSaved, setSaved] = useState(false);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
-  const { handleChange, values, clearForm } = useForm<Categoria>(initialValue);
+  const { handleChange, values, clearForm, setValues } = useForm<Categoria>(
+    initialValue,
+  );
 
   const handleSubmit = useCallback(
     async (event: FormEvent) => {
       event.preventDefault();
 
-      const { titulo, descricao, cor } = values;
-      await categoriasRepository.create({ titulo, descricao, cor });
-
-      setCategorias(state => [...state, values]);
+      const { titulo, descricao, cor, id } = values;
+      if (id) {
+        await categoriasRepository.update({ id, titulo, descricao, cor });
+        setCategorias(state =>
+          state.map(item => (item.id === id ? values : item)),
+        );
+      } else {
+        await categoriasRepository.create({ titulo, descricao, cor });
+        setCategorias(state => [...state, values]);
+      }
       clearForm();
+      inputTitleRef.current?.focus();
+
+      setSaved(true);
+
+      setTimeout(() => {
+        setSaved(false);
+      }, 2000);
     },
     [values, clearForm],
+  );
+
+  const handleEditCategoria = useCallback(
+    async id => {
+      const selectedItem = categorias.find(item => item.id === id);
+      if (selectedItem) {
+        setValues(selectedItem);
+        window.scrollTo(0, 0);
+        inputTitleRef.current?.focus();
+      }
+    },
+    [setValues, categorias],
   );
 
   const handleDeleteCategoria = useCallback(async id => {
     await categoriasRepository.exclude(id);
     setCategorias(state => state.filter(cat => cat.id !== id));
   }, []);
+
+  const handleCleanClick = useCallback(async () => {
+    clearForm();
+    inputTitleRef.current?.focus();
+  }, [clearForm]);
 
   useEffect(() => {
     categoriasRepository.getAll().then(response => {
@@ -58,6 +105,10 @@ const CadastroCategoria: React.FC = () => {
   return (
     <PageDefault>
       <h1>Cadastro de categoria</h1>
+      <MessageContainer>
+        {isSaved && <span>Dados salvos com sucesso</span>}
+      </MessageContainer>
+
       <form onSubmit={handleSubmit}>
         <FormField
           type="text"
@@ -65,6 +116,7 @@ const CadastroCategoria: React.FC = () => {
           value={values.titulo}
           name="titulo"
           onChange={handleChange}
+          ref={inputTitleRef}
         />
 
         <FormField
@@ -84,6 +136,9 @@ const CadastroCategoria: React.FC = () => {
         />
 
         <Button type="submit">Gravar</Button>
+        <Button type="button" onClick={handleCleanClick}>
+          Limpar
+        </Button>
         <Button as={Link} className="ButtonLink" to="/">
           Ir para home
         </Button>
@@ -103,11 +158,18 @@ const CadastroCategoria: React.FC = () => {
               <strong>Cor</strong>
               <span>{categoria.cor}</span>
 
-              <ListItemButton
-                onClick={() => handleDeleteCategoria(categoria.id)}
-              >
-                <FiTrash2 size={20} color="black" />
-              </ListItemButton>
+              <ListItemButtonContainer>
+                <ListItemButton
+                  onClick={() => handleEditCategoria(categoria.id)}
+                >
+                  <FiEdit2 size={20} color="black" />
+                </ListItemButton>
+                <ListItemButton
+                  onClick={() => handleDeleteCategoria(categoria.id)}
+                >
+                  <FiTrash2 size={20} color="black" />
+                </ListItemButton>
+              </ListItemButtonContainer>
             </ListItem>
           ))}
         </List>
