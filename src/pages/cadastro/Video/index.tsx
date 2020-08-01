@@ -33,11 +33,12 @@ interface Categoria {
 }
 
 interface Video {
-  id: number;
+  id?: number;
+  categoriaId?: number;
   categoria: string;
+  url: string;
   titulo: string;
   descricao: string;
-  url: string;
 }
 
 const initialValue = {
@@ -78,14 +79,14 @@ const CadastroVideo: React.FC = () => {
         });
         setVideos(state => state.map(item => (item.id === id ? values : item)));
       } else {
-        await videosRepository.create({
+        const newItem = await videosRepository.create({
           categoria,
           url,
           titulo,
           descricao,
           categoriaId,
         });
-        setVideos(state => [...state, values]);
+        setVideos(state => [...state, newItem]);
       }
       clearForm();
       inputTitleRef.current?.focus();

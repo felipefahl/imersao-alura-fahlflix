@@ -49,8 +49,12 @@ const CadastroCategoria: React.FC = () => {
           state.map(item => (item.id === id ? values : item)),
         );
       } else {
-        await categoriasRepository.create({ titulo, descricao, cor });
-        setCategorias(state => [...state, values]);
+        const newItem = await categoriasRepository.create({
+          titulo,
+          descricao,
+          cor,
+        });
+        setCategorias(state => [...state, newItem]);
       }
       clearForm();
       inputTitleRef.current?.focus();
