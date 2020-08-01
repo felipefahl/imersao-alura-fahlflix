@@ -65,7 +65,28 @@ const CadastroVideo: React.FC = () => {
         categoria => categoria.titulo === values.categoria,
       )?.id;
 
-      await videosRepository.create({ ...values, categoriaId });
+      const { id, categoria, url, titulo, descricao } = values;
+
+      if (id) {
+        await videosRepository.update({
+          id,
+          categoria,
+          url,
+          titulo,
+          descricao,
+          categoriaId,
+        });
+        setVideos(state => state.map(item => (item.id === id ? values : item)));
+      } else {
+        await videosRepository.create({
+          categoria,
+          url,
+          titulo,
+          descricao,
+          categoriaId,
+        });
+        setVideos(state => [...state, values]);
+      }
       clearForm();
       inputTitleRef.current?.focus();
 

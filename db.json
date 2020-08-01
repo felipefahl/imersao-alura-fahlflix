@@ -103,11 +103,11 @@
       "id": 11
     },
     {
+      "categoriaId": 2,
+      "categoria": "Espanhol",
+      "url": "https://www.youtube.com/watch?v=c3pE3Vd7OMc",
       "titulo": "Aprender Espanhol em 5 dias - Conversação para iniciantes",
       "descricao": "Aprenda Espanhol em 5 dias com nossa lista de 600 expressões e palavras mais comuns. Este é um curso intensivo em Espanhol. Tente memorizar todas as palavras e frases. Isso ajudará você a ter ótimas conversas com nativos.",
-      "url": "https://www.youtube.com/watch?v=c3pE3Vd7OMc",
-      "categoria": "Alemão",
-      "categoriaId": 1,
       "id": 12
     },
     {
