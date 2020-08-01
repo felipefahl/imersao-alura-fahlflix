@@ -11,6 +11,12 @@
       "cor": "#e4740c",
       "descricao": "Aprenda espanhhol fácil",
       "id": 2
+    },
+    {
+      "titulo": "Inglês",
+      "cor": "#0f3fd2",
+      "descricao": "Inglês fácil e rápido",
+      "id": 3
     }
   ],
   "videos": [
@@ -117,6 +123,14 @@
       "categoria": "Espanhol",
       "categoriaId": 2,
       "id": 13
+    },
+    {
+      "categoria": "Inglês",
+      "url": "https://www.youtube.com/watch?v=j_HB6XdW5fw",
+      "titulo": "Como aprender inglês sozinho! - 4 passos para garantir sua fluência",
+      "descricao": "Hi guys! Será que é possivel aprender inglês sozinho? Neste vídeo e vou te ensinar os 04 passos para garantir sua fluência! :)",
+      "categoriaId": 3,
+      "id": 14
     }
   ]
 }
