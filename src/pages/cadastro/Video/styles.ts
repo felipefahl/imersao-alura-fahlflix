@@ -91,6 +91,9 @@ export const ListItemCategoryContainer = styled.div`
     position: absolute;
     right: 24px;
     bottom: 24px;
+    @media (max-width: 800px) {
+      display: none;
+    }
   }
 `;
 

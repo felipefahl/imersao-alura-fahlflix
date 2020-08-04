@@ -13,6 +13,15 @@ export const Main = styled.main<MainProps>`
 
   @media (max-width: 800px) {
     margin-top: 40px;
+    form {
+      button,
+      a {
+        width: 100%;
+        margin: 5px;
+        padding: 10px;
+        text-align: center;
+      }
+    }
   }
   ${props =>
     props.paddingAll &&
